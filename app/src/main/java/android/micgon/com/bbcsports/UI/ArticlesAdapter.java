@@ -1,13 +1,18 @@
 package android.micgon.com.bbcsports.UI;
 
 import android.content.Context;
+import android.micgon.com.bbcsports.R;
 import android.micgon.com.bbcsports.data.model.Article;
 import android.micgon.com.bbcsports.data.model.Item;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.GlideBuilder;
 
 import java.util.List;
 
@@ -20,11 +25,14 @@ public class ArticlesAdapter extends RecyclerView.Adapter<ArticlesAdapter.ViewHo
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         public TextView titleTv;
+        public ImageView mImageView;
         PostItemListener mItemListener;
 
         public ViewHolder(View itemView, PostItemListener postItemListener) {
             super(itemView);
             titleTv = itemView.findViewById(android.R.id.text1);
+            mImageView = itemView.findViewById(R.id.icon);
+
 
             this.mItemListener = postItemListener;
             itemView.setOnClickListener(this);
@@ -51,7 +59,7 @@ public class ArticlesAdapter extends RecyclerView.Adapter<ArticlesAdapter.ViewHo
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
 
-        View postView = inflater.inflate(android.R.layout.simple_list_item_1, parent, false);
+        View postView = inflater.inflate(R.layout.article_list_item, parent, false);
 
         ViewHolder viewHolder = new ViewHolder(postView, this.mItemListener);
         return viewHolder;
@@ -62,7 +70,12 @@ public class ArticlesAdapter extends RecyclerView.Adapter<ArticlesAdapter.ViewHo
 
         Article article = mArticles.get(position);
         TextView textView = holder.titleTv;
+        ImageView imageView = holder.mImageView;
         textView.setText(article.getTitle());
+        Glide.with(imageView).load(article.getUrlToImage()).into(imageView);
+
+
+
     }
 
     @Override
