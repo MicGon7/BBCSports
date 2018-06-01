@@ -3,7 +3,6 @@ package android.micgon.com.bbcsports.UI;
 import android.content.Context;
 import android.micgon.com.bbcsports.R;
 import android.micgon.com.bbcsports.data.model.Article;
-import android.micgon.com.bbcsports.data.model.Item;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +11,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.GlideBuilder;
 
 import java.util.List;
 
@@ -22,16 +20,16 @@ public class ArticlesAdapter extends RecyclerView.Adapter<ArticlesAdapter.ViewHo
     private Context mContext;
     private PostItemListener mItemListener;
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        public TextView titleTv;
+        public TextView mTitleText;
         public ImageView mImageView;
         PostItemListener mItemListener;
 
         public ViewHolder(View itemView, PostItemListener postItemListener) {
             super(itemView);
-            titleTv = itemView.findViewById(android.R.id.text1);
-            mImageView = itemView.findViewById(R.id.icon);
+            mTitleText = itemView.findViewById(R.id.supporting_text);
+            mImageView = itemView.findViewById(R.id.media_image);
 
 
             this.mItemListener = postItemListener;
@@ -41,7 +39,7 @@ public class ArticlesAdapter extends RecyclerView.Adapter<ArticlesAdapter.ViewHo
         @Override
         public void onClick(View view) {
             Article article = getItem(getAdapterPosition());
-            this.mItemListener.onPostClick(article.getTitle());
+            this.mItemListener.onPostClick(article.getDescription());
 
             notifyDataSetChanged();
         }
@@ -69,11 +67,10 @@ public class ArticlesAdapter extends RecyclerView.Adapter<ArticlesAdapter.ViewHo
     public void onBindViewHolder(ArticlesAdapter.ViewHolder holder, int position) {
 
         Article article = mArticles.get(position);
-        TextView textView = holder.titleTv;
+        TextView textView = holder.mTitleText;
         ImageView imageView = holder.mImageView;
         textView.setText(article.getTitle());
         Glide.with(imageView).load(article.getUrlToImage()).into(imageView);
-
 
 
     }
