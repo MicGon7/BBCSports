@@ -2,6 +2,7 @@ package android.micgon.com.bbcsports.UI;
 
 import android.content.Context;
 import android.micgon.com.bbcsports.ArticleListFragment;
+import android.micgon.com.bbcsports.BBCGlideModule;
 import android.micgon.com.bbcsports.R;
 import android.micgon.com.bbcsports.model.Article;
 import android.support.v7.widget.RecyclerView;
@@ -12,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 import java.util.List;
 
@@ -25,14 +27,12 @@ public class ArticlesAdapter extends RecyclerView.Adapter<ArticlesAdapter.ViewHo
 
         private TextView mTitleText;
         private ImageView mImageView;
-        private TextView mAuthorText;
         PostItemListener mItemListener;
 
         public ViewHolder(View itemView, PostItemListener postItemListener) {
             super(itemView);
             mTitleText = itemView.findViewById(R.id.supporting_text);
             mImageView = itemView.findViewById(R.id.media_image);
-            mAuthorText = itemView.findViewById(R.id.author_text);
 
 
             this.mItemListener = postItemListener;
@@ -73,10 +73,11 @@ public class ArticlesAdapter extends RecyclerView.Adapter<ArticlesAdapter.ViewHo
         TextView textView = holder.mTitleText;
         ImageView imageView = holder.mImageView;
         textView.setText(article.getTitle());
-        TextView authorText = holder.mAuthorText;
-        authorText.setText(article.getAuthor());
-        Glide.with(imageView).load(article.getUrlToImage()).into(imageView);
-
+        Glide
+                .with(imageView)
+                .load(article.getUrlToImage())
+                .apply(new RequestOptions().circleCrop())
+                .into(imageView);
     }
 
     @Override
