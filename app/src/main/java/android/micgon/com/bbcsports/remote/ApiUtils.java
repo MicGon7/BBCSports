@@ -1,4 +1,6 @@
-package android.micgon.com.bbcsports.data.remote;
+package android.micgon.com.bbcsports.remote;
+
+import android.micgon.com.bbcsports.BuildConfig;
 
 /**
  * This class will have the base URL as a static variable
@@ -7,10 +9,7 @@ package android.micgon.com.bbcsports.data.remote;
  */
 
 public class ApiUtils {
-
-    public static final String BASE_URL = "https://newsapi.org/v2/";
-
     public static BBCService getBBCService() {
-        return RetrofitClient.getClient(BASE_URL).create(BBCService.class);
+        return RetrofitClient.getClient(BuildConfig.BASE_URL).create(BBCService.class);
     }
 }

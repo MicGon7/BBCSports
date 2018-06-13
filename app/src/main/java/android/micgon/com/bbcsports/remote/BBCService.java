@@ -1,14 +1,9 @@
-package android.micgon.com.bbcsports.data.remote;
+package android.micgon.com.bbcsports.remote;
 
-import android.micgon.com.bbcsports.data.model.Article;
-import android.micgon.com.bbcsports.data.model.Item;
-import android.micgon.com.bbcsports.data.model.Source;
-
-import java.util.List;
+import android.micgon.com.bbcsports.model.Item;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
-import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 /**
@@ -28,13 +23,12 @@ import retrofit2.http.Query;
 
 public interface BBCService {
 
-    @GET("top-headlines?sources=bbc-sport&apiKey=5e46a0b9d76b40da8fe3f7dc251d5b3b")
-    Call<Item> getTopArticles();
+    @GET("top-headlines") // end point
+    Call<Item> getTopArticles(@Query("apiKey") String api_key,
+                              @Query("sources") String sources);
 
-    @GET("top-headlines?sources=bbc-sport&apiKey=5e46a0b9d76b40da8fe3f7dc251d5b3b")
-    Call<Item> getTopArticles(@Query("tagged") String tags);
-
-//    @GET("top-headlines?sources=bbc-sport&apiKey={api_key}")
-//    Call<List<Item>> getTopArticles(@Path("api_key") String api_key);
+    @GET("everything")
+    Call<Item> getAllArticles(@Query("apiKey") String api_key,
+                              @Query("sources") String sources);
 
 }

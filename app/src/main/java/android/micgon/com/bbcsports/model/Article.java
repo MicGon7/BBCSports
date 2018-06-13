@@ -1,4 +1,4 @@
-package android.micgon.com.bbcsports.data.model;
+package android.micgon.com.bbcsports.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

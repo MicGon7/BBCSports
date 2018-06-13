@@ -1,4 +1,4 @@
-package android.micgon.com.bbcsports.data.remote;
+package android.micgon.com.bbcsports.remote;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
